@@ -2,6 +2,7 @@ from argparse import ArgumentParser
 
 import dbt_gen.generate_source_yaml
 import dbt_gen.generate_base_model
+import dbt_gen.generate_dbt
 
 
 def add_parser(sub_parsers, name, config_func):
@@ -16,6 +17,7 @@ def cli():
 
     add_parser(sub_parsers, "generate_source", dbt_gen.generate_source_yaml.config_parser)
     add_parser(sub_parsers, "generate_base_model", dbt_gen.generate_base_model.config_parser)
+    add_parser(sub_parsers, "generate_dbt", dbt_gen.generate_dbt.config_parser)
 
     args = parser.parse_args()
 

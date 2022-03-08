@@ -1,3 +1,5 @@
+import pathlib
+
 from setuptools import find_packages, setup
 
 MAIN_REQUIREMENTS = [
@@ -16,12 +18,22 @@ TEST_REQUIREMENTS = [
     "pytest==7.0.1",
 ]
 
+# The directory containing this file
+HERE = pathlib.Path(__file__).parent
+
+# The text of the README file
+README = (HERE / "README.md").read_text()
+
 setup(
     name="dbt_gen",
     version="0.1.0",
+    long_description=README,
+    long_description_content_type="text/markdown",
     description="Tool to generate dbt resources.",
+    url="https://github.com/joon-solutions/dbt-gen",
     author="Joon Solutions",
     author_email="tien.tq@joonsolutions.com",
+    license="GPLv3",
     packages=find_packages(),
     entry_points={
         "console_scripts": [
