@@ -1,8 +1,8 @@
 from argparse import ArgumentParser
 
-import dbt_gen.generate_source_yaml
-import dbt_gen.generate_base_model
-import dbt_gen.generate_dbt
+from . import generate_source_yaml
+from . import generate_base_model
+from . import generate_dbt
 
 
 def add_parser(sub_parsers, name, config_func):
@@ -15,9 +15,9 @@ def cli():
     parser = ArgumentParser()
     sub_parsers = parser.add_subparsers(help="Action")
 
-    add_parser(sub_parsers, "generate_source", dbt_gen.generate_source_yaml.config_parser)
-    add_parser(sub_parsers, "generate_base_model", dbt_gen.generate_base_model.config_parser)
-    add_parser(sub_parsers, "generate_dbt", dbt_gen.generate_dbt.config_parser)
+    add_parser(sub_parsers, "generate_source", generate_source_yaml.config_parser)
+    add_parser(sub_parsers, "generate_base_model", generate_base_model.config_parser)
+    add_parser(sub_parsers, "generate_dbt", generate_dbt.config_parser)
 
     args = parser.parse_args()
 

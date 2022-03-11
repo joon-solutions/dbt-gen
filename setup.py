@@ -26,7 +26,7 @@ README = (HERE / "README.md").read_text()
 
 setup(
     name="dbt_gen",
-    version="0.1.0",
+    version="0.1.3",
     long_description=README,
     long_description_content_type="text/markdown",
     description="Tool to generate dbt resources.",
@@ -37,7 +37,7 @@ setup(
     packages=find_packages(),
     entry_points={
         "console_scripts": [
-            "dbt_gen=dbt_gen.cli:main"
+            "dbt-gen=dbt_gen.cli:main"
         ]
     },
     install_requires=MAIN_REQUIREMENTS,

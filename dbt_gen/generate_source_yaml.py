@@ -12,8 +12,9 @@ import os
 from concurrent.futures import ThreadPoolExecutor, as_completed
 
 from tqdm import tqdm
-from dbt_gen.utils import read_dbt_profile, write_file, DEFAULT_DBT_PROFILE_PATH
-from dbt_gen.adapters import get_adapter
+
+from .adapters import get_adapter
+from .utils import DEFAULT_DBT_PROFILE_PATH, read_dbt_profile, write_file
 
 
 def make_source_yaml(database, name, tables, schema=None):

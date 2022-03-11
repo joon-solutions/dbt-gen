@@ -3,9 +3,9 @@ from concurrent.futures import ThreadPoolExecutor, as_completed
 
 from tqdm import tqdm
 
-from dbt_gen.adapters import get_adapter
-from dbt_gen.templater import get_template
-from dbt_gen.utils import DEFAULT_DBT_PROFILE_PATH, read_dbt_profile, read_yaml, write_file
+from .adapters import get_adapter
+from .templater import get_template
+from .utils import DEFAULT_DBT_PROFILE_PATH, read_dbt_profile, read_yaml, write_file
 
 template = get_template("base_model.sql")
 
