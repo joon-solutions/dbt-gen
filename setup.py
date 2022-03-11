@@ -26,7 +26,7 @@ README = (HERE / "README.md").read_text()
 
 setup(
     name="dbt_gen",
-    version="0.1.3",
+    version="0.1.4",
     long_description=README,
     long_description_content_type="text/markdown",
     description="Tool to generate dbt resources.",
@@ -41,7 +41,7 @@ setup(
         ]
     },
     install_requires=MAIN_REQUIREMENTS,
-    package_data={"": ["templates/*.sql"]},
+    package_data={"": ["templates/*.sql", "templates/*.yml"]},
     extras_require={
         "tests": TEST_REQUIREMENTS,
     },

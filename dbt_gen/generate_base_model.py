@@ -5,18 +5,9 @@ from tqdm import tqdm
 
 from .adapters import get_adapter
 from .templater import get_template
-from .utils import DEFAULT_DBT_PROFILE_PATH, read_dbt_profile, read_yaml, write_file
+from .utils import DEFAULT_DBT_PROFILE_PATH, read_dbt_profile, list_yaml, write_file, read_source_yaml
 
 template = get_template("base_model.sql")
-
-
-def read_source_yaml(path):
-    source_config = read_yaml(path)
-
-    if "sources" not in source_config:
-        raise ValueError("Source YAML malformed. Missing `sources`.")
-
-    return source_config["sources"]
 
 
 def make_model_sql(*args, **kwargs):
@@ -56,21 +47,17 @@ def generate_base_model(profile_path, output_folder, source_path, profile_name="
     os.makedirs(output_folder, exist_ok=True)
 
     profile = read_dbt_profile(profile_path, profile_name=profile_name, target=target)
+    paths = list_yaml(source_path)
 
-    if os.path.isdir(source_path):
-        with ThreadPoolExecutor(threads) as executor:
-            futures = {}
-            for fp in os.listdir(source_path):
-                futures[
-                    executor.submit(generate_base_from_sources, profile, output_folder, os.path.join(source_path, fp))
-                ] = fp
+    with ThreadPoolExecutor(threads) as executor:
+        futures = {}
+        for fp in paths:
+            futures[
+                executor.submit(generate_base_from_sources, profile, output_folder, fp)
+            ] = fp
 
-            for ft in tqdm(as_completed(futures), total=len(futures)):
-                pass
-    elif os.path.isfile(source_path):
-        generate_base_from_sources(profile, output_folder, source_path)
-    else:
-        raise ValueError(f"{source_path} is not a folder or file")
+        for ft in tqdm(as_completed(futures), total=len(futures)):
+            pass
 
     print("Done")
 
