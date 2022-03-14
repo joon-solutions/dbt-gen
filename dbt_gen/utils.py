@@ -41,11 +41,7 @@ def read_source_yaml(path):
 
 def list_yaml(path):
     if os.path.isdir(path):
-        return [
-            os.path.join(path, child)
-            for child in os.listdir(path)
-            if os.path.isfile(os.path.join(path, child))
-        ]
+        return [os.path.join(path, child) for child in os.listdir(path) if os.path.isfile(os.path.join(path, child))]
     elif os.path.isfile(path):
         return [path]
     else:
