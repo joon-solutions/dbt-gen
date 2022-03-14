@@ -61,9 +61,7 @@ def make_test(adapter, source, output_path, **kwargs):
     write_file(output_path, test_yaml)
 
 
-def generate_base_tests(
-    profile_path, source_path, output_folder, profile_name="default", target="dev", extra=None
-):
+def generate_base_tests(profile_path, source_path, output_folder, profile_name="default", target="dev", extra=None):
     extra = extra or {}
     profile = read_dbt_profile(profile_path, profile_name, target)
 

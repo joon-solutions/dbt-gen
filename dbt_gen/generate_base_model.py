@@ -2,6 +2,7 @@ import os
 from concurrent.futures import ThreadPoolExecutor, as_completed
 
 from tqdm import tqdm
+from jinja2 import Template
 
 from .adapters import get_adapter
 from .templater import get_template
@@ -52,9 +53,7 @@ def generate_base_model(profile_path, output_folder, source_path, profile_name="
     with ThreadPoolExecutor(threads) as executor:
         futures = {}
         for fp in paths:
-            futures[
-                executor.submit(generate_base_from_sources, profile, output_folder, fp)
-            ] = fp
+            futures[executor.submit(generate_base_from_sources, profile, output_folder, fp)] = fp
 
         for ft in tqdm(as_completed(futures), total=len(futures)):
             pass
@@ -63,6 +62,12 @@ def generate_base_model(profile_path, output_folder, source_path, profile_name="
 
 
 def run(args):
+    if args.template:
+        global template
+        print(f"Use custom template at {args.template}")
+        with open(args.template, "r", encoding="utf-8") as file:
+            template = Template(file.read())
+
     generate_base_model(
         profile_path=args.profile_path,
         output_folder=args.output_folder,
@@ -95,3 +100,4 @@ def config_parser(parser):
         default=None,
         help="Max threads. Default is your machine number of threads.",
     )
+    parser.add_argument("--template", type=str, default=None, help="Path to custom Jinja template.")
