@@ -28,3 +28,25 @@ def read_dbt_profile(file_path, profile_name="default", target="dev"):
 def write_file(file_path, text):
     with open(file_path, "w", encoding="utf-8") as file:
         file.write(text)
+
+
+def read_source_yaml(path):
+    source_config = read_yaml(path)
+
+    if "sources" not in source_config:
+        raise ValueError("Source YAML malformed. Missing `sources`.")
+
+    return source_config["sources"]
+
+
+def list_yaml(path):
+    if os.path.isdir(path):
+        return [
+            os.path.join(path, child)
+            for child in os.listdir(path)
+            if os.path.isfile(os.path.join(path, child))
+        ]
+    elif os.path.isfile(path):
+        return [path]
+    else:
+        raise ValueError(f"Path {path} is not a file or directory")

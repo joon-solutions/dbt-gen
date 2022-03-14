@@ -45,6 +45,8 @@ class ColumnInfo:
 
 
 class BaseAdapter(ABC):
+    name = None
+
     def __init__(self, database) -> None:
         self.database = database
 

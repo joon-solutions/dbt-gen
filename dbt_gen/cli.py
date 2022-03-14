@@ -3,6 +3,7 @@ from argparse import ArgumentParser
 from . import generate_source_yaml
 from . import generate_base_model
 from . import generate_dbt
+from . import generate_base_test
 
 
 def add_parser(sub_parsers, name, config_func):
@@ -18,6 +19,7 @@ def cli():
     add_parser(sub_parsers, "generate_source", generate_source_yaml.config_parser)
     add_parser(sub_parsers, "generate_base_model", generate_base_model.config_parser)
     add_parser(sub_parsers, "generate_dbt", generate_dbt.config_parser)
+    add_parser(sub_parsers, "generate_base_test", generate_base_test.config_parser)
 
     args = parser.parse_args()
 

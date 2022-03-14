@@ -9,6 +9,8 @@ logger = logging.getLogger(__name__)
 
 
 class SnowflakeAdapter(BaseAdapter):
+    name = "snowflake"
+
     def __init__(self, user, password, account, warehouse, role, database):
         self.user = user
         self._password = password
@@ -44,7 +46,7 @@ class SnowflakeAdapter(BaseAdapter):
         return self._conn
 
     def execute(self, query, **kwargs):
-        cursor = self._connection.cursor()
+        cursor = self._connection.cursor(snowflake.connector.DictCursor)
         try:
             cursor.execute(query, **kwargs)
             return cursor.fetchall()

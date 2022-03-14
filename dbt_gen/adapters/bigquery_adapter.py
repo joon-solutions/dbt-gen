@@ -8,6 +8,8 @@ from .base import ColumnInfo, BaseAdapter
 
 
 class BigQueryAdapter(BaseAdapter):
+    name = "bigquery"
+
     def __init__(self, database, location="US"):
         self.database = database
         self.location = location
