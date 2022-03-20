@@ -27,7 +27,7 @@ README = (HERE / "README.md").read_text()
 
 setup(
     name="dbt_gen",
-    version="0.1.6",
+    version="0.1.7",
     long_description=README,
     long_description_content_type="text/markdown",
     description="Tool to generate dbt resources.",
