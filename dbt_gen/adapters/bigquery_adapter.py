@@ -37,8 +37,7 @@ class BigQueryAdapter(BaseAdapter):
         query = "select *" f" from `{self.database}.{dataset}.INFORMATION_SCHEMA.COLUMNS`;"
         dataframe = self.execute_pandas(query)
         dataframe = dataframe.loc[
-            dataframe["table_schema"].apply(lambda x: (x.lower() != "information_schema" and not x.startswith("_")))
-            & dataframe["table_name"].apply(lambda x: not x.startswith("_")),
+            dataframe["table_schema"].apply(lambda x: (x.lower() != "information_schema" and not x.startswith("_"))),
             :,
         ]
         dataframe.sort_values(by=["table_schema", "table_name", "ordinal_position"], inplace=True)
@@ -52,8 +51,8 @@ class BigQueryAdapter(BaseAdapter):
 
     def list_tables(self, dataset: str) -> Generator[str, None, None]:
         meta_df = self.get_column_metadata_df(dataset)
-        for schema in meta_df["table_name"].unique():
-            yield schema
+        for name in meta_df["table_name"].unique():
+            yield name
 
     def list_columns(self, dataset: str, table: str) -> Generator[ColumnInfo, None, None]:
         meta_df = self.get_column_metadata_df(dataset)

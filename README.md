@@ -36,7 +36,7 @@ optional arguments:
                         threads.
 ```
 
-### 3. Generate base models
+### 3. Generate base models and tests
 
 ```bash
 dbt_gen generate_base_model --help
@@ -122,3 +122,13 @@ optional arguments:
                         Dbt profile name. Default is `default`.
   --target TARGET       Dbt profile target. Default is `dev`.
 ```
+
+## Caveats
+
+* For BigQuery sources, dbt-gen supports making tests only based on Stitch meta table `_sdc_primary_keys`. If there is no such table, test YAML will be empty.
+* For Snowflake, dbt-gen makes tests based on Snowflake table constraints.
+
+
+## TODOs
+
+* Add primary keys information into variables in rendering base model SQLs

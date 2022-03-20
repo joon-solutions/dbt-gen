@@ -3,18 +3,19 @@ import pathlib
 from setuptools import find_packages, setup
 
 MAIN_REQUIREMENTS = [
-    "pyarrow>=6.0.1",
-    "pyYAML>=6.0",
-    "pandas>=1.3.4",
+    "cookiecutter==1.7.3",
     "google-cloud-bigquery>=2.34.0",
-    "snowflake-connector-python>=2.7.4",
     "jinja2>=2.11.3",
+    "pandas>=1.3.4",
+    "pyarrow<6.1.0,>=6.0.0",
+    "pyYAML>=6.0",
+    "snowflake-connector-python>=2.7.4",
     "tqdm>=4.63.0",
 ]
 
 TEST_REQUIREMENTS = [
-    "flake8==4.0.1",
     "black==22.1.0",
+    "flake8==4.0.1",
     "pytest==7.0.1",
 ]
 
@@ -26,7 +27,7 @@ README = (HERE / "README.md").read_text()
 
 setup(
     name="dbt_gen",
-    version="0.1.5",
+    version="0.1.6",
     long_description=README,
     long_description_content_type="text/markdown",
     description="Tool to generate dbt resources.",
