@@ -1,8 +1,6 @@
 import os
 from typing import Any, Mapping, Optional
 
-from tqdm import tqdm
-
 from .adapters import BaseAdapter, BigQueryAdapter, SnowflakeAdapter, get_adapter
 from .runner import Runner
 from .templater import Templater
@@ -17,9 +15,9 @@ class UnsupportedException(Exception):
 
 def get_snowflake_pkeys(adapter: SnowflakeAdapter, source: Mapping[str, Any]) -> Mapping[str, Any]:
     pkeys = {}
-    for table in tqdm(source["tables"]):
+    for table in source["tables"]:
         schema = source.get("schema", source["name"])
-        query = f"describe table {source['database']}.{schema}.{table['name']}"
+        query = f'describe table "{source["database"]}"."{schema.upper()}"."{table["name"].upper()}"'
         cols = []
         for row in adapter.execute(query):
             if row["primary key"] == "Y":
