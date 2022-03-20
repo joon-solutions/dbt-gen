@@ -30,6 +30,9 @@ def make_source_yaml(database, name, tables, schema=None):
 
     contents.append("    tables:")
     for tbl in tables:
+        if tbl.startswith("_"):
+            continue
+
         contents.append(f"      - name: {tbl.lower()}")
 
     contents.append("")
