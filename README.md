@@ -136,3 +136,6 @@ optional arguments:
 ## TODOs
 
 * Add primary keys information into variables in rendering base model SQLs
+
+## Video guide link
+https://drive.google.com/file/d/15XBbwQ-lq_VPqSJnaRN_wFtao1jHcjUz/view
