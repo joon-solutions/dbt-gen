@@ -1,20 +1,24 @@
 # dbt-gen
 Tool for generating dbt model, source files.
 
+## How to install
+Install dbt-gen:      pip install dbt-gen
+Install cookiecutter: pip install --user cookiecutter
+
 ## Commands
 
 ### 1. Generate dbt project from cookiecutter template
 
 ```bash
-dbt_gen generate_dbt
+dbt-gen generate_dbt
 ```
 
 ### 2. Generate source
 
 ```bash
-dbt_gen generate_source --help
+dbt-gen generate_source --help
 
-usage: dbt_gen generate_source [-h] [--profile-path PROFILE_PATH]
+usage: dbt-gen generate_source [-h] [--profile-path PROFILE_PATH]
                                [--profile-name PROFILE_NAME] [--target TARGET]
                                [--database DATABASE] [--threads THREADS]
                                source_folder
@@ -39,7 +43,7 @@ optional arguments:
 ### 3. Generate base models and tests
 
 ```bash
-dbt_gen generate_base_model --help
+dbt-gen generate_base_model --help
 
 usage: dbt-gen generate_base_model [-h] [--profile-path PROFILE_PATH]
                                    [--profile-name PROFILE_NAME]
@@ -102,7 +106,7 @@ dbt-gen generate_base_models --template your_custom_template.sql path/to/source 
 ### 4. Generate base tests
 
 ```bash
-dbt_gen generate_base_test --help
+dbt-gen generate_base_test --help
 
 usage: dbt-gen generate_base_test [-h] [--profile-path PROFILE_PATH]
                                   [--profile-name PROFILE_NAME]
@@ -132,3 +136,6 @@ optional arguments:
 ## TODOs
 
 * Add primary keys information into variables in rendering base model SQLs
+
+## Video guide link
+https://drive.google.com/file/d/15XBbwQ-lq_VPqSJnaRN_wFtao1jHcjUz/view
